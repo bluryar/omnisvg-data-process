@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["omnisvg_data_process"]
+where = ["."]
 
 [project]
 name = "omnisvg-data-process"
@@ -13,11 +13,16 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "huggingface-hub>=0.30.2",
-    "lxml>=5.2.2",  # For SVG parsing
+    "lxml>=5.2.2", # For SVG parsing
     "tinycss2>=1.3.0", # For CSS color parsing
     "typer>=0.12.3", # For CLI
     "loguru>=0.7.2", # For logging
     "tqdm>=4.66.4", # For progress bars
+    "transformers>=4.51.3",
+    "tokenizers>=0.21.1",
+    "torch>=2.7.0",
+    "pillow>=11.2.1",
+    "cairosvg>=2.7.1",
 ]
 
 [tool.pytest.ini_options]

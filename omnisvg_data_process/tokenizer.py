@@ -1,19 +1,17 @@
 import re
 from typing import Optional
 from .constants import VIEWBOX_WIDTH, VIEWBOX_HEIGHT, SOP_TOKEN, EOS_TOKEN, PATH_START_TOKEN, PATH_END_TOKEN, CMD_TOKENS, FILL_URL_TOKEN, FILL_CURRENTCOLOR_TOKEN
-from .tokenize import Tokenize
+from .entokenize import Entokenize
 from .detokenize import Detokenize
 from .normalizer import Normalizer
 from .logger import Logger
 
-class SVGTokenizer(Tokenize, Detokenize, Normalizer, Logger):
+class SVGTokenizer(Entokenize, Detokenize, Normalizer, Logger):
     def __init__(self):
         super().__init__(label='SVGTokenizer') # Initialize parent classes, including Logger
         self.logger.info("Initializing SVGTokenizer...")
         self.vocabulary = self._build_vocabulary()
         self.logger.info(f"Vocabulary built with {len(self.vocabulary)} unique tokens.")
-        # Add more initialization if needed by parent classes via super()
-        # super().__init__() # Example if parents had __init__
 
     def _build_vocabulary(self) -> set:
         """Generates the set of all possible token strings."""
@@ -68,7 +66,7 @@ class SVGTokenizer(Tokenize, Detokenize, Normalizer, Logger):
     def svg_to_tokens(self, svg_content: str) -> Optional[str]:
         """Converts SVG content string to a single string of concatenated tokens."""
         # Calls the tokenize method inherited from the Tokenize class
-        tokens_list = self.tokenize(svg_content)
+        tokens_list = self.entokenize(svg_content)
         if tokens_list:
             return "".join(tokens_list)
         else:

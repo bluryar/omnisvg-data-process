@@ -38,9 +38,9 @@ def hex_to_rgb(hex_color: str) -> Optional[Tuple[int, int, int]]:
 # Regex for hex colors
 hex_pattern = re.compile(r"^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$")
 
-# Regex for rgb/rgba formats - Corrected escaping
-rgb_pattern = re.compile(r"rgb\(\s*(\d+%?)\s*,\s*(\d+%?)\s*,\s*(\d+%?)\s*\)", re.IGNORECASE)
-rgba_pattern = re.compile(r"rgba\(\s*(\d+%?)\s*,\s*(\d+%?)\s*,\s*(\d+%?)\s*,\s*([\d.]+)\s*\)", re.IGNORECASE)
+# Regex for rgb/rgba formats - Allow floats in percentages
+rgb_pattern = re.compile(r"rgb\(\s*((?:\d*\.\d+|\d+)\%?)\s*,\s*((?:\d*\.\d+|\d+)\%?)\s*,\s*((?:\d*\.\d+|\d+)\%?)\s*\)", re.IGNORECASE)
+rgba_pattern = re.compile(r"rgba\(\s*((?:\d*\.\d+|\d+)\%?)\s*,\s*((?:\d*\.\d+|\d+)\%?)\s*,\s*((?:\d*\.\d+|\d+)\%?)\s*,\s*([\d.]+)\s*\)", re.IGNORECASE)
 
 def _parse_rgb_value(value_str: str) -> Optional[int]:
     """Parses a single RGB value (number or percentage) string to int 0-255."""

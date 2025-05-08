@@ -44,7 +44,7 @@ def process_svgs(
                 with open(svg_path, 'r', encoding='utf-8') as f:
                     svg_content = f.read()
 
-                tokens = tokenizer.tokenize(svg_content)
+                tokens = tokenizer.entokenize(svg_content)
 
                 if tokens:
                     output_data = {

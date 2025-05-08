@@ -4,12 +4,12 @@ from lxml import etree
 from .utils import parse_color, parse_path_d, discretize_arc_params, process_coords
 from .logger import Logger
 
-class Tokenize(Logger):
+class Entokenize(Logger):
   def _format_coord_token(self, x: int, y: int) -> str:
       # New format with value inside
       return f"<｜coord_{x}_{y}｜>"
 
-  def tokenize(self, svg_content: str) -> Optional[List[str]]:
+  def entokenize(self, svg_content: str) -> Optional[List[str]]:
       """Tokenizes SVG content with path delimiters, value-specific tokens, and no color quantization."""
       try:
           parser = etree.XMLParser(remove_comments=True, recover=True)
