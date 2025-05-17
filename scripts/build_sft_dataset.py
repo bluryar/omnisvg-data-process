@@ -145,7 +145,7 @@ def process_single_item(item_data: Dict[str, Any], images_dir: Path) -> Optional
 
     original_id = item_data.get('id', 'N/A')
     svg_content = item_data.get('svg')
-    description = item_data.get('description')
+    description = str(item_data.get('description', '')).replace('<image>', '').replace('<video>', '').replace('<audio>', '')
 
     if not svg_content or not description:
         logging.warning(f"Skipping item (ID: {original_id}) due to missing SVG or description.")
@@ -182,12 +182,13 @@ def process_single_item(item_data: Dict[str, Any], images_dir: Path) -> Optional
         output_data = {
             "uuid": entry_uuid,
             "svg": svg_content, # Keep original SVG
-            "description": description,
+            "description": f"{description}",
             "text_instruction": random_text_instruction,
             "image_instruction": random_image_instruction,
-            "text_input": description,
+            "text_input": f"{description}",
             "image_input": "<image>",
-            "output": svg_tokens,
+            "output": svg_tokens if svg_tokens else "",
+            "empty_images": [],
             "images": image_list,
             "_rasterization_successful": rasterization_successful, # Internal flag
             "_tokenization_successful": True # Flag success
